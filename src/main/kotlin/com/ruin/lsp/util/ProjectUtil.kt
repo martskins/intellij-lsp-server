@@ -179,7 +179,7 @@ fun getProject(projectPath: String): Project? {
                 val project = alreadyOpenProject ?: mgr.loadAndOpenProject(projectPath)
                 projectRef.set(project)
 
-                hideProjectFrame(project)
+                // hideProjectFrame(project) // Do not hide the project frame
             } catch (e: IOException) {
                 e.printStackTrace()
             } catch (e: JDOMException) {
