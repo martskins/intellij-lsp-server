@@ -13,7 +13,6 @@ import org.jetbrains.plugins.groovy.lang.documentation.GroovyDocumentationProvid
 import java.awt.Image
 
 class HoverDocumentationProviderGroovy : AbstractDocumentationProvider() {
-    // KotlinQuickDocumentationProvider is final.
     private val innerProvider = GroovyDocumentationProvider()
 
     override fun generateDoc(element: PsiElement, originalElement: PsiElement?): String? {
