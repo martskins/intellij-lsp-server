@@ -13,7 +13,7 @@ import org.jetbrains.kotlin.idea.refactoring.rename.findElementForRename
 
 class RenameCommand(val position: Position, private val identifier: TextDocumentIdentifier, private val newName: String) : DocumentCommand<WorkspaceEdit>{
     override fun execute(ctx: ExecutionContext): WorkspaceEdit {
-        val edits = differenceFromAction(ctx.file) { editor, copy ->
+        val edits = differenceFromAction(ctx.file) { _, copy ->
             val doc = getDocument(copy)
             val offset = position.toOffset(doc!!)
 
@@ -24,7 +24,7 @@ class RenameCommand(val position: Position, private val identifier: TextDocument
             }
 
             ApplicationManager.getApplication().runWriteAction {
-                val factory = RefactoringFactory.getInstance(editor.project).createRename(elem, newName, false, true)
+                val factory = RefactoringFactory.getInstance(copy.project).createRename(elem, newName, false, true)
                 val usages = factory.findUsages()
                 factory.doRefactoring(usages)
                 ctx.client!!.showMessage(MessageParams(MessageType.Log, "Renamed ${usages.size + 1} occurrences"))
