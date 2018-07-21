@@ -16,6 +16,7 @@ import org.eclipse.lsp4j.MarkedString
 import org.eclipse.lsp4j.Position
 import org.eclipse.lsp4j.jsonrpc.messages.Either
 import org.jetbrains.kotlin.idea.KotlinLanguage
+import org.jetbrains.plugins.groovy.GroovyLanguage
 
 class HoverCommand(val position: Position) : DocumentCommand<Hover>, Disposable {
     override fun execute(ctx: ExecutionContext): Hover {
@@ -50,6 +51,7 @@ class HoverCommand(val position: Position) : DocumentCommand<Hover>, Disposable 
         return when(language) {
             is JavaLanguage -> HoverDocumentationProvider()
             is KotlinLanguage -> HoverDocumentationProviderKt()
+            is GroovyLanguage -> HoverDocumentationProviderGroovy()
             else -> null
         }
     }

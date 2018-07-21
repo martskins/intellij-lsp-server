@@ -11,6 +11,7 @@ import com.ruin.lsp.commands.document.formatting.DocumentFormattingCommand
 import com.ruin.lsp.commands.document.highlight.DocumentHighlightCommand
 import com.ruin.lsp.commands.document.hover.HoverCommand
 import com.ruin.lsp.commands.document.lens.CodeLensCommand
+import com.ruin.lsp.commands.document.rename.RenameCommand
 import com.ruin.lsp.commands.document.symbol.DocumentSymbolCommand
 import org.eclipse.lsp4j.*
 import org.eclipse.lsp4j.jsonrpc.messages.Either
@@ -56,9 +57,8 @@ class MyTextDocumentService(val server: MyLanguageServer) : TextDocumentService 
     override fun codeLens(params: CodeLensParams): CompletableFuture<MutableList<out CodeLens>> =
         server.asInvokeAndWaitFuture(server.context.rootProject!!, params.textDocument.uri, CodeLensCommand())
 
-    override fun rename(params: RenameParams): CompletableFuture<WorkspaceEdit> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun rename(params: RenameParams): CompletableFuture<WorkspaceEdit> =
+        server.asInvokeAndWaitFuture(server.context.rootProject!!, params.textDocument.uri, RenameCommand(params.position, params.textDocument, params.newName))
 
     override fun completion(params: CompletionParams): CompletableFuture<Either<MutableList<CompletionItem>, CompletionList>> =
         server.asCancellableInvokeAndWaitFuture(server.context.rootProject!!, params.textDocument.uri, CompletionCommand(params.position,

@@ -141,7 +141,7 @@ class WorkspaceManager {
             val doc = getDocument(psi) ?: return@Runnable
 
             FileDocumentManager.getInstance().reloadFromDisk(doc)
-            VirtualFileManager.getInstance().syncRefresh()
+            //VirtualFileManager.getInstance().syncRefresh()
             PsiDocumentManager.getInstance(project).commitAllDocuments()
         }))
 
