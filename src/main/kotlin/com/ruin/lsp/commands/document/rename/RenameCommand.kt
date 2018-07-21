@@ -2,7 +2,6 @@ package com.ruin.lsp.commands.document.rename
 
 import com.intellij.openapi.application.ApplicationManager
 import com.intellij.psi.*
-import com.intellij.psi.util.PsiTreeUtil
 import com.intellij.refactoring.RefactoringFactory
 import com.ruin.lsp.commands.DocumentCommand
 import com.ruin.lsp.commands.ExecutionContext
